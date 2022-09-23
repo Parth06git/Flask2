@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <title>Upload</title>
+</head>
+<body>
+    <div class="container my-4">
+        <form action ="/upload" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Default file input example</label>
+                <input class="form-control" type="file" id="pic" name="pic" >
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form> 
+    </div>
+
+    <div class="container my-3">
+        {% if allimg|length==0 %}
+        <div class="alert alert-dark" role="alert">
+            <h6>No Image is uploaded</h6>
+        </div>
+        {% else %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for img in allimg %}
+                        <tr>
+                            <th scope="row"> {{loop.index}} </th>
+                            <td> {{img.name}} </td>
+                            <td> <img src="img({{img.img}}, {{img.name}}, {{img.minetype}}"> </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+
+</body>
+</html>
